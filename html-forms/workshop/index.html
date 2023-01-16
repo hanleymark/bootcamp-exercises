@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact | Learn HTML Forms</title>
+  <link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+  <h1>Contact</h1>
+
+  <form method="get" action="https://learn-forms.netlify.com/submit/part3">
+    <p>
+      <label for="name">Name:</label>
+      <input id="name" type="text" name="name" placeholder="enter your name" required>
+    </p>
+    <p>
+      <label for="email">Email:</label>
+      <input id="email" type="email" name="email" placeholder="enter your email" required>
+    </p>
+    <p>
+      <label for="tel">Telephone:</label>
+      <input id="tel" type="tel" name="tel" placeholder="enter your phone number" required>
+    </p>
+    <p>
+      <label for="message">Your message:</label>
+      <textarea id="message" name="message" rows="4" placeholder="enter your message"></textarea>
+    </p>
+    <fieldset>
+      <legend>Preferred contact method:</legend>
+      <input type="radio" id="contact-email" name="contact" value="email"checked>
+      <label for="contact-email">Email</label>
+      <input type="radio" id="contact-phone" name="contact" value="phone">
+      <label for="contact-phone">Phone</label>
+      <input type="radio" id="contact-post" name="contact" value="post">
+      <label for="contact-post">Post</label>
+    </fieldset>
+    <p>
+      <input type="checkbox" id="marketingConsent" name="marketingConsent" checked>
+      <label for="marketingConsent">Please wreck my inbox</label>
+    </p>
+    <p>
+    </p>
+    <input type="submit" value="Submit">
+    </p>
+  </form>
+</body>
+
+</html>
