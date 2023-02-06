@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>POKEMON SEARCH</title>
+</head>
+
+<body>
+  <h1>Pokemon search</h1>
+  <form id="form">
+    <label for="name">Pokemon name</label><br>
+    <input type="search" id="name" placeholder="Enter Pokemon name" />
+    <input type="submit" value="Search" />
+  </form>
+  <p id="result"></p>
+
+  <script>
+    const form = document.querySelector("#form");
+    const result = document.querySelector("#result");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const pokemon = form["name"].value;
+
+      fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`, {
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(response.status);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          const h1 = document.createElement("h2");
+          const imgFront = document.createElement("img");
+          const imgBack = document.createElement("img");
+
+          h1.innerText = data.name;
+          imgFront.src = data.sprites.front_default;
+          imgBack.src = data.sprites.back_default;
+
+          result.append(h1,imgFront,imgBack);
+        })
+        .catch((error) => {
+          console.error(`Oh dear, this happened:\n${error}`);
+        });
+    });
+  </script>
+</body>
+
+</html>
