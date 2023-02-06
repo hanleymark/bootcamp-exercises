@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Real world fetch</title>
+</head>
+
+<body>
+  <form id="form">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" placeholder="Fullname" /><br><br>
+    <label for="job">Job:</label><br>
+    <input type="text" id="job" placeholder="Your dream job" /><br><br>
+    <input type="submit" value="Submit">
+  </form>
+  <script>
+    const form = document.querySelector("#form");
+    form.addEventListener("submit", (event) => {
+      const name = form["name"].value;
+      const job = form["job"].value;
+
+      const data = {
+        name: name,
+        job: job,
+      };
+
+      fetch("https://echo.oliverjam.workers.dev/json", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(response.status);
+          }
+          return response.json();
+        })
+        .then((json) => console.log(json))
+        .catch((error) => {
+          console.error(`Oh dear, this happened:\n${error}`);
+        });
+        event.preventDefault();
+    });
+  </script>
+</body>
+
+</html>
