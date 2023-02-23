@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn Testing</title>
+</head>
+
+<body>
+  <h1>Open the console</h1>
+
+  <script>
+    // the function we're testing
+    function square(x) {
+      return x * x;
+    }
+
+    function wasItSquared(n, nSquared) {
+      result = `${n} squared is ${nSquared}?`;
+      result += (nSquared / n === n) ? ` <-- PASSED 😀` : ` <-- FAILED 😞`;
+
+      return result;
+    }
+
+    function equal(item1, item2) {
+      const result = (item1 === item2);
+
+      if (result) {
+        console.info(`TEST PASSED 😀 --> Expected: ${item1} Received: ${item2}`);
+      }
+      else {
+        console.error(`TEST FAILED 😞 --> Expected: ${item1} Received: ${item2}`);
+      }
+    }
+
+    const testValues = [45, 5, 23, 7657655, 32.35, -76.999, 0.00000000006];
+
+    testValues.forEach((n) => {
+      let s = square(n);
+      equal(n * n, s);
+    });
+
+    equal(square(3.5), 12.25);
+
+    // Try a failed test:
+    equal(square(5),5+5);
+  </script>
+</body>
+
+</html>
