@@ -19,7 +19,7 @@ test("filter() should return an array with the same number of elements for which
 
 test("filter() should return an array of elements for which the supplied function returns true", () => {
   const result = filter([0, 1, 2, 3, 4, 5], (x) => x < 3);
-  equal(result.toString(), [0, 1, 2].toString());
+  equal(JSON.stringify(result), JSON.stringify([0, 1, 2]));
 });
 
 // testing every()
@@ -71,4 +71,36 @@ test("reduce() should return a total with a multiplying function", () => {
 test("some() should return a joined string of elements", () => {
   const result = reduce([1, 2, 3, 4, 5], (a, c) => { return "" + a + c }, "");
   equal(result, "12345");
+});
+
+// testing flat()
+
+test("flat() should return the same array if no nested arrays", () => {
+  const result = flat([1, 2, 3]);
+  console.log(result);
+  equal(JSON.stringify(result), JSON.stringify([1, 2, 3]));
+});
+
+test("flat() should return flat array of all elements with nesting to one level", () => {
+  const result = flat([1, 2, 3, [4, 5]]);
+  console.log(result);
+  equal(JSON.stringify(result), JSON.stringify([1, 2, 3, 4, 5]));
+});
+
+test("flat() should return array of all elements including second nested array with nesting to two levels", () => {
+  const result = flat([1, 2, 3, [4, [5]]]);
+  console.log(result);
+  equal(JSON.stringify(result), JSON.stringify([1, 2, 3, 4, [5]]));
+});
+
+test("flat() should return fully flat array when depth = Infinity", () => {
+  const result = flat([1, 2, 3, [4, [5, [6]]]], Infinity);
+  console.log(result);
+  equal(JSON.stringify(result), JSON.stringify([1, 2, 3, 4, 5, 6]));
+});
+
+test("flat() should handle objects that are not numbers or arrays", () => {
+  const result = flat([1, "2", { fruit: "banana" }, [3, [4]], { myArray: [5, 6] }]);
+  console.log(result);
+  equal(JSON.stringify(result), JSON.stringify([1, "2", { fruit: "banana" }, 3, [4], { myArray: [5, 6] }]));
 });
